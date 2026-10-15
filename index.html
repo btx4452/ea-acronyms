@@ -82,7 +82,13 @@ mark{background:var(--accent-soft);color:inherit;border-radius:2px;padding:0 1px
 .empty{padding:48px 0;text-align:center;color:var(--muted)}
 
 @media (max-width:640px){
-  html{scroll-padding-top:250px}
+  html{scroll-padding-top:150px}
+  header.top .eyebrow{display:none}
+  header.top{padding-block:16px 10px}
+  .finder{gap:8px;padding-block:8px 6px}
+  .az{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .az::-webkit-scrollbar{display:none}
+  .az a,.az span{flex:none}
   .entry>button{grid-template-columns:minmax(0,1fr) auto}
   .entry>button .body{grid-column:1/-1;grid-row:2}
   .meta{flex-direction:row;grid-column:2;grid-row:1}
@@ -371,7 +377,7 @@ function renderAZ(list){
   const has=new Set(list.map(d=>letterOf(d.a)));
   const searching=!!st.q.trim();
   $("az").innerHTML="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(L=>has.has(L)&&!searching?`<a href="#L-${L}" data-l="${L}">${L}</a>`:`<span aria-hidden="true">${L}</span>`).join("");
-  $("az").hidden=st.mode!=="list";
+  $("az").hidden=st.mode!=="list"||searching;
 }
 function renderList(list){
   if(!list.length){$("list").innerHTML=`<p class="empty">No acronym matches “${esc(st.q)}”${st.topic!=="All"?` in ${esc(st.topic)}`:""}.</p>`;return;}
