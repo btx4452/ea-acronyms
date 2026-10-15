@@ -192,6 +192,19 @@ const D=[
 ["CCPA","California Consumer Privacy Act","California's data-privacy law.","Compliance & Security","B"],
 ["CDP","Customer Data Platform","System that collects and unifies customer data from all touchpoints into one profile (e.g. SAP CDP).","Business Applications","B"],
 ["CDR","Call Detail Record","Raw record of one telecom usage event (who, when, how long), before it is rated into money.","Finance & Billing","B"],
+["CEO","Chief Executive Officer","Top executive; responsible for strategy and overall company performance.","Organisation","B"],
+["CFO","Chief Financial Officer","Runs finance: planning, accounting, cash, investor relations; key approver for pricing and discounts.","Organisation","B"],
+["COO","Chief Operating Officer","Runs day-to-day operations and makes sure the business processes deliver.","Organisation","B"],
+["CIO","Chief Information Officer","Responsible for internal IT: applications, infrastructure and IT budget; typical buyer of enterprise software.","Organisation","B"],
+["CTO","Chief Technology Officer","Responsible for the technology behind the company's own product (in a SaaS company: engineering and platform).","Organisation","B"],
+["CDO","Chief Data Officer / Chief Digital Officer","Owns data strategy and governance (Data) or the digital transformation agenda (Digital).","Organisation","B"],
+["CMO","Chief Marketing Officer","Leads marketing: brand, demand generation and the lead pipeline.","Organisation","A"],
+["CRO","Chief Revenue Officer","Owns all revenue-generating teams (sales, often also customer success and renewals); common in SaaS.","Organisation","A"],
+["CCO","Chief Customer Officer","Owns the post-sale customer journey: onboarding, success, support, retention.","Organisation","A"],
+["CPO","Chief Product Officer","Owns the product strategy and roadmap; leads product management.","Organisation","A"],
+["CISO","Chief Information Security Officer","Responsible for information security and compliance (e.g. SOC 2, ISO 27001).","Organisation","A"],
+["CHRO","Chief Human Resources Officer","Leads people strategy: hiring, development, compensation.","Organisation","A"],
+["CAIO","Chief AI Officer","Newer role that steers how the company adopts and governs AI.","Organisation","A"],
 ["CI","Conversation Intelligence","Tools that record, transcribe and analyse sales calls.","Marketing & Sales","S"],
 ["CLTV / LTV","Customer Lifetime Value","Total gross profit expected from a customer over the whole relationship.","SaaS Metrics","B"],
 ["CMP","Consent Management Platform","Tool that collects and stores users' cookie/tracking consent (e.g. OneTrust, Cookiebot).","Compliance & Security","N"],
@@ -324,7 +337,7 @@ const D=[
 ["VPC","Virtual Private Cloud","Isolated network segment inside a public cloud.","Technology","B"],
 ["WP","Work Package","Numbered deliverable of the semester project (WP1–WP8).","Course","S"],
 ["YoY","Year-over-Year","Comparison with the same period last year.","SaaS Metrics","S"]
-].map(([a,f,m,t,u])=>({a,f,m,t,u:{S:"Slides",N:"Narrative",B:"Slides + Narrative",A:"Added"}[u]}));
+].map(([a,f,m,t,u])=>({a,f,m,t,u:{S:"Slides",N:"Narrative",B:"Slides + Narrative",A:"Added"}[u]})).sort((x,y)=>x.a.localeCompare(y.a,"en",{sensitivity:"base"}));
 
 // Related-term clusters (concepts taught together in the course)
 const GROUPS=[
@@ -342,6 +355,7 @@ const GROUPS=[
  ["Cloud",["SaaS","PaaS","AWS","GCP","EC2","S3","VPC","K8s","FinOps"]],
  ["AI",["AI / GenAI","LLM","GPT","ML","NLP","MCP","M2M"]],
  ["Security & privacy",["GDPR","CCPA","PCI-DSS","SOC 2","IEEE / IEC / ISO","SSO","MFA","PEP","DR","CMP"]],
+ ["C-suite",["CEO","CFO","COO","CIO","CTO","CDO","CMO","CRO","CCO","CPO","CISO","CHRO","CAIO"]],
  ["Sanctions",["OFAC","SDN"]],
  ["Master data & SAP",["MDM","MDG","SKU","ATP","S/4HANA","HANA","BTP","SAP"]],
  ["Integration",["API","REST","ESB","SDK","HTTP"]],
