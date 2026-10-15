@@ -181,6 +181,7 @@ const D=[
 ["BPO","Business Process Outsourcing","Handing a business process (e.g. L1 support) to an external provider.","Operations","N"],
 ["BTP","Business Technology Platform","SAP's cloud platform for integration, extension, data and AI.","Business Applications","N"],
 ["CAC","Customer Acquisition Cost","Total sales and marketing cost to win one new customer.","SaaS Metrics","B"],
+["CAGR","Compound Annual Growth Rate","Average yearly growth rate over several years, assuming growth compounds each year: (end value / start value)^(1 / years) − 1.","SaaS Metrics","A"],
 ["CapEx","Capital Expenditure","Spending on long-lived assets (e.g. servers, buildings), depreciated over time.","Finance & Billing","N"],
 ["CCPA","California Consumer Privacy Act","California's data-privacy law.","Compliance & Security","B"],
 ["CDP","Customer Data Platform","System that collects and unifies customer data from all touchpoints into one profile (e.g. SAP CDP).","Business Applications","B"],
@@ -317,12 +318,12 @@ const D=[
 ["VPC","Virtual Private Cloud","Isolated network segment inside a public cloud.","Technology","B"],
 ["WP","Work Package","Numbered deliverable of the semester project (WP1–WP8).","Course","S"],
 ["YoY","Year-over-Year","Comparison with the same period last year.","SaaS Metrics","S"]
-].map(([a,f,m,t,u])=>({a,f,m,t,u:{S:"Slides",N:"Narrative",B:"Slides + Narrative"}[u]}));
+].map(([a,f,m,t,u])=>({a,f,m,t,u:{S:"Slides",N:"Narrative",B:"Slides + Narrative",A:"Added"}[u]}));
 
 // Related-term clusters (concepts taught together in the course)
 const GROUPS=[
  ["Lead funnel",["MQL","SAL","SQL (lead)","PQL","SDR","AE","BANT","MEDDPICC","ICP"]],
- ["Recurring revenue",["ARR","MRR","ACV","NRR","GRR","CLTV / LTV","CAC","KPI"]],
+ ["Recurring revenue",["ARR","MRR","ACV","NRR","GRR","CLTV / LTV","CAC","CAGR","YoY","KPI"]],
  ["Profit & cost lines",["P&L","COGS","OPEX / OpEx","CapEx","S&M","G&A","SG&A","R&D","EBIT","EBITDA","EBT / PBT","FCF"]],
  ["Revenue recognition",["ASC 606","IFRS","GAAP","POB","SSP"]],
  ["Lead-to-cash",["CRM","CPQ","ERP","PO","AR","GL","DSO","SEPA","ACH","SWIFT"]],
