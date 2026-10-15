@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+<title>EA Course Acronyms</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: an index-card glossary — sticky finder bar (search, topics, A–Z) over letter-grouped entries; second mode turns the same filtered set into a flashcard deck. Course system: black/white/grey + one teal accent. */
+:root{
+  --bg:#ffffff; --surface:#f5f6f6; --line:#dcdfdf; --fg:#151717; --muted:#5d6565;
+  --accent:#007a7a; --accent-soft:#e3f1f1; --on-accent:#ffffff;
+  --sans: Aptos, "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121414; --surface:#1b1e1e; --line:#2e3333; --fg:#ebeeee; --muted:#9aa3a3;
+  --accent:#3fb8b8; --accent-soft:#163131; --on-accent:#0b1414; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121414; --surface:#1b1e1e; --line:#2e3333; --fg:#ebeeee; --muted:#9aa3a3;
+  --accent:#3fb8b8; --accent-soft:#163131; --on-accent:#0b1414; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-padding-top:220px}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:980px;margin:0 auto}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding-block:28px 16px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+h1{font-size:clamp(24px,4vw,32px);line-height:1.15;margin:0;font-weight:700;text-wrap:balance}
+.count{color:var(--muted);margin:4px 0 0;font-variant-numeric:tabular-nums}
+.modes{display:inline-flex;border:1px solid var(--line);border-radius:8px;padding:3px;gap:3px;background:var(--surface)}
+.modes button{border:0;background:transparent;padding:7px 14px;border-radius:6px;cursor:pointer;font-weight:600;color:var(--muted)}
+.modes button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+
+.finder{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px 8px;border-bottom:1px solid var(--line);display:grid;gap:10px}
+.search{position:relative}
+.search input{width:100%;padding:11px 40px 11px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:16px}
+.search input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+.search .clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:transparent;cursor:pointer;color:var(--muted);font-size:20px;width:32px;height:32px;border-radius:6px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+.chip{flex:none;border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+.chip .n{color:var(--muted);font-variant-numeric:tabular-nums;margin-left:4px}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.chip[aria-pressed="true"] .n{color:inherit;opacity:.8}
+.az{display:flex;flex-wrap:wrap;gap:2px}
+.az a,.az span{font-family:var(--mono);font-size:13px;font-weight:600;width:28px;height:28px;display:grid;place-items:center;border-radius:5px;text-decoration:none}
+.az a{color:var(--fg)}
+.az a:hover{background:var(--accent-soft);color:var(--accent)}
+.az span{color:var(--line)}
+
+/* list */
+#list{padding-top:8px}
+.letter{display:flex;align-items:baseline;gap:12px;margin:28px 0 4px}
+.letter h2{font-family:var(--mono);font-size:22px;margin:0;color:var(--accent)}
+.letter::after{content:"";flex:1;border-bottom:1px solid var(--line)}
+.entry{border-bottom:1px solid var(--line)}
+.entry>button{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:4px 20px;padding:12px 8px;border-radius:6px}
+.entry>button:hover{background:var(--surface)}
+.entry>button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.acr{font-family:var(--mono);font-weight:600;font-size:15px;overflow-wrap:anywhere}
+.full{font-weight:600}
+.mean{color:var(--muted);margin-top:2px}
+.meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right}
+.tag{font-size:12px;border:1px solid var(--line);border-radius:4px;padding:1px 7px;white-space:nowrap;color:var(--muted)}
+.src{font-size:12px;color:var(--muted);white-space:nowrap}
+.rel{padding:0 8px 14px 178px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rel b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-right:4px}
+.rel a{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:5px;text-decoration:none}
+.rel a:hover{text-decoration:underline}
+.rel .none{color:var(--muted);font-size:13px}
+.entry.flash>button{animation:flash 1.4s ease-out}
+@keyframes flash{0%,30%{background:var(--accent-soft)}100%{background:transparent}}
+mark{background:var(--accent-soft);color:inherit;border-radius:2px;padding:0 1px}
+.empty{padding:48px 0;text-align:center;color:var(--muted)}
+
+@media (max-width:640px){
+  html{scroll-padding-top:250px}
+  .entry>button{grid-template-columns:minmax(0,1fr) auto}
+  .entry>button .body{grid-column:1/-1;grid-row:2}
+  .meta{flex-direction:row;grid-column:2;grid-row:1}
+  .src{display:none}
+  .rel{padding-left:8px}
+}
+
+/* flashcards */
+#cards{padding-top:24px;display:grid;gap:18px;justify-items:center}
+.deckbar{width:100%;max-width:560px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.prog{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px}
+.prog strong{color:var(--fg)}
+.bar{width:100%;max-width:560px;height:4px;background:var(--surface);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;background:var(--bg);padding:5px 10px;font-size:13px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.card{width:100%;max-width:560px;aspect-ratio:8/5;perspective:1200px;cursor:pointer;border:0;padding:0;background:none}
+.card .inner{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:12px;background:var(--surface);display:grid;place-items:center;padding:24px;text-align:center;overflow:auto}
+.face.back{transform:rotateY(180deg);background:var(--bg);border-color:var(--accent)}
+.face .t{position:absolute;top:12px;left:14px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.face .hint{position:absolute;bottom:12px;left:0;right:0;font-size:12px;color:var(--muted)}
+.big{font-family:var(--mono);font-size:clamp(30px,8vw,52px);font-weight:600;line-height:1.1;overflow-wrap:anywhere}
+.bigtext{font-size:clamp(18px,4vw,24px);font-weight:600;line-height:1.3;text-wrap:balance}
+.back .answer{display:grid;gap:8px}
+.back .answer .acr{font-size:22px;color:var(--accent)}
+.back .answer .full{font-size:18px}
+.back .answer .mean{font-size:15px;max-width:42ch;margin:0 auto}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:10px 18px;font-weight:600;cursor:pointer;min-width:120px}
+.btn:hover{border-color:var(--fg)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn:disabled{opacity:.4;cursor:default}
+.keys{font-size:12px;color:var(--muted);text-align:center}
+.keys kbd{font-family:var(--mono);border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.done{max-width:560px;text-align:center;padding:40px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);display:grid;gap:10px;justify-items:center}
+.done h2{margin:0;font-size:22px}
+@media (prefers-reduced-motion:reduce){.card .inner,.bar i{transition:none}.entry.flash>button{animation:none}}
+footer{margin-top:40px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">Enterprise Architecture Management for SaaS Business Models</p>
+      <h1>Acronyms in this course</h1>
+      <p class="count" id="count"></p>
+    </div>
+    <div class="modes" role="group" aria-label="View">
+      <button id="m-list" aria-pressed="true">List</button>
+      <button id="m-cards" aria-pressed="false">Flashcards</button>
+    </div>
+  </header>
+
+  <div class="finder">
+    <div class="search">
+      <label for="q" class="eyebrow" style="position:absolute;left:-9999px">Search acronyms</label>
+      <input id="q" type="search" placeholder="Search, e.g. ARR, revenue, lead, GDPR…" autocomplete="off">
+      <button class="clear" id="clear" aria-label="Clear search" hidden>×</button>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Filter by topic"></div>
+    <nav class="az" id="az" aria-label="Jump to letter"></nav>
+  </div>
+
+  <main id="list"></main>
+  <main id="cards" hidden></main>
+
+  <footer>Taken from the course slides (incl. speaker notes) and the lecture narrative. Click an entry to see related terms.</footer>
+</div>
+
+<script>
+const D=[
+["ABM","Account-Based Marketing","Marketing aimed at a hand-picked list of named target accounts rather than a broad audience.","Marketing & Sales","S"],
+["ACH","Automated Clearing House","US network for bank-to-bank electronic payments, e.g. direct debits.","Finance & Billing","B"],
+["ACV","Annual Contract Value","Average yearly value of one customer contract.","SaaS Metrics","B"],
+["ADR","Architecture Decision Record","Short document recording an architecture decision, its options and its rationale.","Enterprise Architecture","N"],
+["AE","Account Executive","Salesperson who runs a deal from qualified lead to signed contract.","Marketing & Sales","B"],
+["API","Application Programming Interface","Defined interface through which one system calls another.","Technology","B"],
+["APM","Application Portfolio Management","Inventory and assessment of all applications in the landscape by business value and technical fitness.","Enterprise Architecture","B"],
+["APQC","American Productivity & Quality Center","Organisation behind the Process Classification Framework, a widely used cross-industry process reference model.","Enterprise Architecture","B"],
+["AR","Accounts Receivable","Money customers owe the company for invoices issued but not yet paid.","Finance & Billing","B"],
+["ARB","Architecture Review Board","Governance body that reviews and approves architecture decisions.","Enterprise Architecture","B"],
+["ARR","Annual Recurring Revenue","Recurring subscription revenue normalised to one year.","SaaS Metrics","B"],
+["ASC 606","Accounting Standards Codification Topic 606","US GAAP standard for revenue recognition from customer contracts (equivalent of IFRS 15).","Finance & Billing","B"],
+["ATP","Available-to-Promise","Real-time check whether stock or capacity is available to confirm an order.","Business Applications","B"],
+["AWS","Amazon Web Services","Amazon's cloud computing platform.","Technology","B"],
+["B2B","Business-to-Business","Selling to companies.","Business Models","B"],
+["B2C","Business-to-Consumer","Selling to private individuals.","Business Models","B"],
+["BANT","Budget, Authority, Need, Timeline","Classic lead-qualification checklist.","Marketing & Sales","B"],
+["BART","Bay Area Rapid Transit","San Francisco transit system; early user of magnetic stored-value fare cards (1972).","Case Studies","N"],
+["BI","Business Intelligence","Reporting and analytics on company data.","Technology","N"],
+["BPO","Business Process Outsourcing","Handing a business process (e.g. L1 support) to an external provider.","Operations","N"],
+["BTP","Business Technology Platform","SAP's cloud platform for integration, extension, data and AI.","Business Applications","N"],
+["CAC","Customer Acquisition Cost","Total sales and marketing cost to win one new customer.","SaaS Metrics","B"],
+["CapEx","Capital Expenditure","Spending on long-lived assets (e.g. servers, buildings), depreciated over time.","Finance & Billing","N"],
+["CCPA","California Consumer Privacy Act","California's data-privacy law.","Compliance & Security","B"],
+["CDP","Customer Data Platform","System that collects and unifies customer data from all touchpoints into one profile (e.g. SAP CDP).","Business Applications","B"],
+["CDR","Call Detail Record","Raw record of one telecom usage event (who, when, how long), before it is rated into money.","Finance & Billing","B"],
+["CI","Conversation Intelligence","Tools that record, transcribe and analyse sales calls.","Marketing & Sales","S"],
+["CLTV / LTV","Customer Lifetime Value","Total gross profit expected from a customer over the whole relationship.","SaaS Metrics","B"],
+["CMP","Consent Management Platform","Tool that collects and stores users' cookie/tracking consent (e.g. OneTrust, Cookiebot).","Compliance & Security","N"],
+["CMS","Content Management System","System for managing website content.","Business Applications","B"],
+["COGS","Cost of Goods Sold","Direct cost of delivering the product (for SaaS: hosting, support, third-party licences).","Finance & Billing","B"],
+["CPQ","Configure, Price, Quote","Software that configures products, calculates prices and generates quotes.","Business Applications","B"],
+["CRM","Customer Relationship Management","System of record for customers, contacts, leads and opportunities.","Business Applications","B"],
+["CS","Customer Success","Function that ensures customers reach value, renew and expand.","Customer Success","B"],
+["CSAT","Customer Satisfaction Score","Survey score of satisfaction with a specific interaction.","Customer Success","B"],
+["CSM","Customer Success Manager","Person responsible for a customer's adoption, health and renewal.","Customer Success","B"],
+["CX","Customer Experience","The customer's overall experience with a company; also SAP's name for its customer-facing product line.","Business Applications","S"],
+["DAU / MAU","Daily / Monthly Active Users","Number of unique users active per day / month; DAU ÷ MAU = stickiness.","SaaS Metrics","S"],
+["DR","Disaster Recovery","Ability to restore systems and data after a major outage.","Compliance & Security","N"],
+["DSO","Days Sales Outstanding","Average number of days it takes to collect payment after invoicing.","Finance & Billing","B"],
+["DSP","Demand-Side Platform","System for automated, real-time buying of online ad inventory.","Marketing & Sales","N"],
+["EA","Enterprise Architecture","Discipline that describes and steers how business, applications, data and technology fit together.","Enterprise Architecture","B"],
+["EBIT","Earnings Before Interest and Taxes","Operating profit.","Finance & Billing","S"],
+["EBITDA","Earnings Before Interest, Taxes, Depreciation and Amortisation","Operating profit before non-cash charges; common profitability proxy.","Finance & Billing","B"],
+["EBR","Executive Business Review","Senior-level review meeting with a customer's leadership.","Customer Success","S"],
+["EBT / PBT","Earnings / Profit Before Tax","Profit after interest but before income tax.","Finance & Billing","S"],
+["EC2","Elastic Compute Cloud","AWS service for renting virtual servers (launched 2006).","Technology","N"],
+["EOL / EoS","End of Life / End of Support","Date after which a vendor stops selling / patching a product.","Enterprise Architecture","B"],
+["ERP","Enterprise Resource Planning","Core system for finance, logistics, procurement and HR (e.g. SAP S/4HANA).","Business Applications","B"],
+["ESB","Enterprise Service Bus","Middleware that routes and transforms messages between applications.","Technology","S"],
+["ETL","Extract, Transform, Load","Process for moving data from source systems into an analytics store.","Technology","S"],
+["FCC","Federal Communications Commission","US telecom regulator; charges regulatory fees that appear on telecom invoices.","Finance & Billing","S"],
+["FCF","Free Cash Flow","Operating cash flow minus capital expenditure.","Finance & Billing","B"],
+["FinOps","Financial Operations","Practice of managing and optimising cloud spending.","Technology","B"],
+["FTE","Full-Time Equivalent","Unit of staffing: one full-time employee.","Organisation","B"],
+["FTR","First Response Time","Time until a support ticket gets its first reply (usually abbreviated FRT).","Customer Success","S"],
+["FY","Fiscal Year","Company's financial reporting year (e.g. FY25).","Finance & Billing","B"],
+["G&A","General & Administrative","Overhead costs (finance, HR, legal, management).","Finance & Billing","S"],
+["GAAP","Generally Accepted Accounting Principles","US accounting rules.","Finance & Billing","B"],
+["GCP","Google Cloud Platform","Google's cloud computing platform.","Technology","N"],
+["GDPR","General Data Protection Regulation","EU data-protection law.","Compliance & Security","B"],
+["GL","General Ledger","Central accounting record of all journal entries.","Finance & Billing","B"],
+["GPT","Generative Pre-trained Transformer","Type of large language model (e.g. Einstein GPT).","Technology","B"],
+["GRR","Gross Revenue Retention","Share of recurring revenue kept from existing customers, excluding expansion.","SaaS Metrics","N"],
+["GST","Goods and Services Tax","Consumption tax used in e.g. India, Australia, Canada.","Finance & Billing","B"],
+["GTM","Go-to-Market","How a company reaches, sells to and serves its customers.","Marketing & Sales","B"],
+["HANA","High-performance Analytic Appliance","SAP's in-memory database, basis of S/4HANA.","Business Applications","S"],
+["HCM","Human Capital Management","HR software (people, payroll, talent).","Business Applications","S"],
+["ICP","Ideal Customer Profile","Description of the company type that benefits most from the product.","Marketing & Sales","S"],
+["IDC","International Data Corporation","IT market-research and analyst firm.","Enterprise Architecture","N"],
+["IEEE / IEC / ISO","Institute of Electrical and Electronics Engineers / International Electrotechnical Commission / International Organization for Standardization","Standards bodies (e.g. ISO/IEC/IEEE 42010 for architecture description, ISO 27001 for information security).","Compliance & Security","B"],
+["IFRS","International Financial Reporting Standards","International accounting rules (IFRS 15 = revenue recognition).","Finance & Billing","B"],
+["IP","Intellectual Property","Legally protected creations (code, patents, brands).","Business Models","B"],
+["IPO","Initial Public Offering","First sale of a company's shares on a stock exchange.","Finance & Billing","B"],
+["ITSM","IT Service Management","Processes and tools for running IT services (e.g. ServiceNow).","Business Applications","N"],
+["K8s","Kubernetes","Platform for running containerised applications.","Technology","S"],
+["KPI","Key Performance Indicator","Metric used to track performance against a goal.","SaaS Metrics","B"],
+["LLM","Large Language Model","AI model trained on large text corpora to understand and generate language.","Technology","B"],
+["M&A","Mergers & Acquisitions","Buying or combining companies.","Business Models","B"],
+["M2M","Machine-to-Machine","Transactions or communication between systems without a human in the loop.","Technology","B"],
+["MAP","Marketing Automation Platform","System that runs campaigns, nurture emails and lead scoring automatically.","Business Applications","B"],
+["MarTech","Marketing Technology","The tool stack used by marketing.","Marketing & Sales","B"],
+["MCP","Model Context Protocol","Open protocol that lets AI agents access tools and data via a standard interface.","Technology","B"],
+["MDG","Master Data Governance","SAP application for central creation and control of master data.","Business Applications","B"],
+["MDM","Master Data Management","Discipline and tools that keep master data (customers, products) consistent.","Business Applications","B"],
+["MEDDPICC","Metrics, Economic buyer, Decision criteria, Decision process, Paper process, Identify pain, Champion, Competition","Enterprise deal-qualification framework.","Marketing & Sales","B"],
+["MFA","Multi-Factor Authentication","Login requiring two or more proofs of identity.","Compliance & Security","S"],
+["ML","Machine Learning","AI technique where models learn patterns from data.","Technology","B"],
+["MQ","Magic Quadrant","Gartner's vendor-positioning chart (Leaders, Challengers, Visionaries, Niche Players).","Enterprise Architecture","B"],
+["MQL","Marketing Qualified Lead","Lead whose engagement shows enough interest to pass on to sales.","Marketing & Sales","B"],
+["MRR","Monthly Recurring Revenue","Recurring subscription revenue per month.","SaaS Metrics","B"],
+["MSA","Master Service Agreement","Framework contract governing all future orders between two parties.","Marketing & Sales","S"],
+["MVP","Minimum Viable Product","Smallest version of a product that can be tested with real users.","Business Models","N"],
+["NCSA","National Center for Supercomputing Applications","Created Mosaic, the first popular web browser with embedded images.","Case Studies","N"],
+["NDA","Non-Disclosure Agreement","Confidentiality contract.","Marketing & Sales","B"],
+["NFC","Near-Field Communication","Short-range wireless technology behind contactless payment (e.g. Apple Pay).","Technology","N"],
+["NLP","Natural Language Processing","AI for analysing human language.","Technology","B"],
+["NPS","Net Promoter Score","Customer-loyalty score based on 'How likely are you to recommend us?'.","Customer Success","B"],
+["NRR","Net Revenue Retention","Recurring revenue kept from existing customers including expansion, minus churn and downgrades.","SaaS Metrics","B"],
+["OFAC","Office of Foreign Assets Control","US Treasury office that maintains sanctions lists.","Compliance & Security","B"],
+["OLAP","Online Analytical Processing","Databases optimised for analysis of large data volumes.","Technology","S"],
+["OLTP","Online Transaction Processing","Databases optimised for many small transactions.","Technology","N"],
+["OPEX / OpEx","Operating Expenses","Ongoing costs of running the business.","Finance & Billing","B"],
+["P&L","Profit and Loss statement","Income statement: revenue minus costs over a period.","Finance & Billing","B"],
+["PaaS","Platform as a Service","Cloud platform on which customers build and run their own applications.","Business Models","B"],
+["PCI-DSS","Payment Card Industry Data Security Standard","Security rules for handling card data.","Compliance & Security","B"],
+["PEP","Policy Enforcement Point","Component that enforces what a user is allowed to do in a system.","Technology","S"],
+["PLG","Product-Led Growth","Growth model where the product itself (free trial, freemium) drives acquisition.","Marketing & Sales","B"],
+["PO","Purchase Order","Customer's formal order document; often required on enterprise invoices.","Finance & Billing","S"],
+["POB","Performance Obligation","Distinct promise in a contract; revenue is recognised when it is fulfilled.","Finance & Billing","S"],
+["PoC","Proof of Concept","Short trial to prove a solution works in the customer's context.","Marketing & Sales","S"],
+["POS","Point of Sale","Checkout terminal where a payment is made.","Business Applications","B"],
+["PQL","Product Qualified Lead","Free/trial user whose product usage signals buying intent.","Marketing & Sales","B"],
+["PSTN","Public Switched Telephone Network","The traditional telephone network.","Technology","N"],
+["QBR","Quarterly Business Review","Regular review meeting between vendor and customer on value delivered.","Customer Success","B"],
+["R&D","Research & Development","Product development function and its costs.","Finance & Billing","B"],
+["RDBMS","Relational Database Management System","Database based on tables and SQL.","Technology","N"],
+["RDF","Recency, Depth, Frequency","Customer-health model: RFM adapted for subscriptions, with usage depth replacing monetary value.","Customer Success","B"],
+["REST","Representational State Transfer","Common architectural style for web APIs.","Technology","B"],
+["RFM","Recency, Frequency, Monetary value","Classic marketing model for scoring customer value.","Marketing & Sales","B"],
+["RFP","Request for Proposal","Formal invitation to vendors to submit offers against defined requirements.","Marketing & Sales","B"],
+["ROI","Return on Investment","Gain from an investment relative to its cost.","Finance & Billing","B"],
+["S&M","Sales & Marketing","Cost line for sales and marketing.","Finance & Billing","B"],
+["S/4HANA","SAP Business Suite 4 SAP HANA","SAP's current ERP system.","Business Applications","B"],
+["S3","Simple Storage Service","AWS object-storage service (launched 2006).","Technology","B"],
+["SaaS","Software as a Service","Software delivered over the internet as a subscription.","Business Models","B"],
+["SAL","Sales Accepted Lead","Lead an SDR has confirmed fits the ICP.","Marketing & Sales","B"],
+["SCOPE","Structured Computations Optimized for Parallel Execution","Microsoft's SQL-like language for big-data processing on Cosmos.","Case Studies","N"],
+["SDK","Software Development Kit","Libraries/tools developers embed to integrate with a platform.","Technology","S"],
+["SDN","Specially Designated Nationals (list)","US OFAC list of sanctioned persons and entities.","Compliance & Security","B"],
+["SDR","Sales Development Representative","Salesperson who qualifies inbound leads and books meetings.","Marketing & Sales","B"],
+["SEO","Search Engine Optimisation","Improving visibility in organic search results.","Marketing & Sales","B"],
+["SEPA","Single Euro Payments Area","EU framework for euro bank transfers and direct debits.","Finance & Billing","B"],
+["SFA","Sales Force Automation","CRM functions that automate sales tasks and workflows.","Business Applications","S"],
+["SG&A","Selling, General & Administrative expenses","Combined sales, marketing and overhead costs.","Finance & Billing","S"],
+["SI","System Integrator","Partner firm that implements software for customers.","Marketing & Sales","S"],
+["SKU","Stock Keeping Unit","Unique code for one sellable product or variant.","Business Applications","B"],
+["SLA","Service Level Agreement","Contractual commitment on service quality (uptime, response time).","Customer Success","B"],
+["SMART","Specific, Measurable, Achievable, Relevant, Time-bound","Checklist for well-formulated goals.","General","S"],
+["SMB","Small and Medium-sized Business","Customer segment of smaller companies.","Marketing & Sales","B"],
+["SOC 2","System and Organization Controls 2","Independent audit report on a service provider's security controls.","Compliance & Security","B"],
+["SPM","Software Portfolio Management","Managing the organisation's full set of software assets and their lifecycle.","Enterprise Architecture","N"],
+["SQL (language)","Structured Query Language","Standard language for querying relational databases.","Technology","B"],
+["SQL (lead)","Sales Qualified Lead","Lead confirmed by a discovery call (BANT) as a real sales opportunity.","Marketing & Sales","B"],
+["SSO","Single Sign-On","One login gives access to many applications.","Compliance & Security","B"],
+["SSP","Standalone Selling Price","Price at which an item would be sold separately; used to allocate revenue in bundles.","Finance & Billing","S"],
+["SWIFT","Society for Worldwide Interbank Financial Telecommunication","Global network for international bank transfers.","Finance & Billing","S"],
+["TCO","Total Cost of Ownership","All costs of a solution over its lifetime, not just the licence.","Enterprise Architecture","B"],
+["TOGAF","The Open Group Architecture Framework","Widely used enterprise-architecture method.","Enterprise Architecture","B"],
+["TTR","Time to Resolution","Time until a support ticket is solved.","Customer Success","S"],
+["TTV","Time to Value","Time until a new customer reaches its first meaningful outcome.","Customer Success","B"],
+["USF","Universal Service Fund","US telecom levy that appears on telecom invoices.","Finance & Billing","S"],
+["USP","Unique Selling Proposition","What makes an offering different from competitors.","Marketing & Sales","S"],
+["VAR","Value-Added Reseller","Partner that resells software bundled with its own services.","Marketing & Sales","S"],
+["VAT","Value-Added Tax","Consumption tax used in the EU.","Finance & Billing","B"],
+["VPC","Virtual Private Cloud","Isolated network segment inside a public cloud.","Technology","B"],
+["WP","Work Package","Numbered deliverable of the semester project (WP1–WP8).","Course","S"],
+["YoY","Year-over-Year","Comparison with the same period last year.","SaaS Metrics","S"]
+].map(([a,f,m,t,u])=>({a,f,m,t,u:{S:"Slides",N:"Narrative",B:"Slides + Narrative"}[u]}));
+
+// Related-term clusters (concepts taught together in the course)
+const GROUPS=[
+ ["Lead funnel",["MQL","SAL","SQL (lead)","PQL","SDR","AE","BANT","MEDDPICC","ICP"]],
+ ["Recurring revenue",["ARR","MRR","ACV","NRR","GRR","CLTV / LTV","CAC","KPI"]],
+ ["Profit & cost lines",["P&L","COGS","OPEX / OpEx","CapEx","S&M","G&A","SG&A","R&D","EBIT","EBITDA","EBT / PBT","FCF"]],
+ ["Revenue recognition",["ASC 606","IFRS","GAAP","POB","SSP"]],
+ ["Lead-to-cash",["CRM","CPQ","ERP","PO","AR","GL","DSO","SEPA","ACH","SWIFT"]],
+ ["Usage billing",["CDR","GB / MB / TB","FCC","USF","VAT","GST"]],
+ ["Customer health",["CS","CSM","QBR","EBR","NPS","CSAT","TTV","RFM","RDF","DAU / MAU","FTR","TTR","SLA"]],
+ ["EA practice",["EA","TOGAF","ARB","ADR","APM","SPM","TCO","EOL / EoS","APQC"]],
+ ["Vendor selection",["MQ","IDC","RFP","PoC","TCO","SOC 2"]],
+ ["Marketing stack",["MarTech","MAP","CMS","CDP","CMP","DSP","SEO","ABM","CI","SFA"]],
+ ["Data",["SQL (language)","RDBMS","OLTP","OLAP","ETL","DB","BI"]],
+ ["Cloud",["SaaS","PaaS","AWS","GCP","EC2","S3","VPC","K8s","FinOps"]],
+ ["AI",["AI / GenAI","LLM","GPT","ML","NLP","MCP","M2M"]],
+ ["Security & privacy",["GDPR","CCPA","PCI-DSS","SOC 2","IEEE / IEC / ISO","SSO","MFA","PEP","DR","CMP"]],
+ ["Sanctions",["OFAC","SDN"]],
+ ["Master data & SAP",["MDM","MDG","SKU","ATP","S/4HANA","HANA","BTP","SAP"]],
+ ["Integration",["API","REST","ESB","SDK","HTTP"]],
+ ["Go-to-market",["GTM","PLG","B2B","B2C","SMB","SI","VAR","USP","ICP"]],
+ ["Payments history",["POS","NFC","PSTN","QR","BART"]]
+];
+const BY=Object.fromEntries(D.map(d=>[d.a,d]));
+const REL={};
+for(const [,ms] of GROUPS) for(const a of ms){REL[a]=REL[a]||new Set(); for(const b of ms) if(b!==a&&BY[b]) REL[a].add(b);}
+
+const TOPICS=["All",...[...new Set(D.map(d=>d.t))].sort()];
+const slug=s=>s.replace(/[^A-Za-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const letterOf=a=>{const c=a[0].toUpperCase();return /[A-Z]/.test(c)?c:"#"};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const st={q:"",topic:"All",mode:"list"};
+try{const s=JSON.parse(localStorage.getItem("ea-acr")||"{}"); if(TOPICS.includes(s.topic)) st.topic=s.topic;}catch(e){}
+const save=()=>{try{localStorage.setItem("ea-acr",JSON.stringify({topic:st.topic}))}catch(e){}};
+
+const $=id=>document.getElementById(id);
+function filtered(){
+  const q=st.q.trim().toLowerCase();
+  return D.filter(d=>(st.topic==="All"||d.t===st.topic)&&(!q||(d.a+" "+d.f+" "+d.m).toLowerCase().includes(q)))
+   .sort((x,y)=>{ if(!q) return 0; const r=d=>d.a.toLowerCase()===q?0:d.a.toLowerCase().startsWith(q)?1:d.f.toLowerCase().includes(q)?2:3; return r(x)-r(y)});
+}
+function hi(s){const q=st.q.trim(); if(!q) return esc(s); const i=s.toLowerCase().indexOf(q.toLowerCase()); if(i<0) return esc(s); return esc(s.slice(0,i))+"<mark>"+esc(s.slice(i,i+q.length))+"</mark>"+esc(s.slice(i+q.length));}
+
+function renderChips(){
+  const base=D.filter(d=>{const q=st.q.trim().toLowerCase();return !q||(d.a+" "+d.f+" "+d.m).toLowerCase().includes(q)});
+  $("chips").innerHTML=TOPICS.map(t=>{const n=t==="All"?base.length:base.filter(d=>d.t===t).length;
+    return `<button class="chip" data-t="${esc(t)}" aria-pressed="${t===st.topic}">${esc(t)}<span class="n">${n}</span></button>`}).join("");
+}
+function renderAZ(list){
+  const has=new Set(list.map(d=>letterOf(d.a)));
+  const searching=!!st.q.trim();
+  $("az").innerHTML="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(L=>has.has(L)&&!searching?`<a href="#L-${L}" data-l="${L}">${L}</a>`:`<span aria-hidden="true">${L}</span>`).join("");
+  $("az").hidden=st.mode!=="list";
+}
+function renderList(list){
+  if(!list.length){$("list").innerHTML=`<p class="empty">No acronym matches “${esc(st.q)}”${st.topic!=="All"?` in ${esc(st.topic)}`:""}.</p>`;return;}
+  const searching=!!st.q.trim(); let html="",cur=null;
+  for(const d of list){
+    const L=letterOf(d.a);
+    if(!searching&&L!==cur){cur=L;html+=`<div class="letter" id="L-${L}"><h2>${L}</h2></div>`;}
+    html+=`<article class="entry" id="${slug(d.a)}"><button aria-expanded="false" data-a="${esc(d.a)}">
+      <div class="acr">${hi(d.a)}</div>
+      <div class="body"><div class="full">${hi(d.f)}</div><div class="mean">${hi(d.m)}</div></div>
+      <div class="meta"><span class="tag">${esc(d.t)}</span><span class="src">${d.u}</span></div>
+    </button><div class="rel" hidden></div></article>`;
+  }
+  $("list").innerHTML=html;
+}
+function toggleEntry(btn,force){
+  const art=btn.parentElement, rel=art.querySelector(".rel"); const open=force??btn.getAttribute("aria-expanded")!=="true";
+  btn.setAttribute("aria-expanded",open); rel.hidden=!open;
+  if(open&&!rel.innerHTML){const r=[...(REL[btn.dataset.a]||[])];
+    rel.innerHTML=`<b>Related</b>`+(r.length?r.map(a=>`<a href="#${slug(a)}" data-go="${esc(a)}">${esc(a)}</a>`).join(""):`<span class="none">No related terms listed</span>`);}
+}
+function goTo(a){
+  if(!filtered().some(d=>d.a===a)){st.q="";$("q").value="";st.topic="All";save();render();}
+  const el=document.getElementById(slug(a)); if(!el) return;
+  el.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+  toggleEntry(el.querySelector("button"),true);
+}
+
+/* flashcards */
+const fc={deck:[],i:0,known:0,total:0,front:"acr",flipped:false};
+function buildDeck(){const l=filtered().slice(); for(let i=l.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[l[i],l[j]]=[l[j],l[i]];}
+  fc.deck=l; fc.known=0; fc.total=l.length; fc.flipped=false;}
+function renderCards(){
+  const scope=(st.topic==="All"?"All topics":st.topic)+(st.q.trim()?` · “${esc(st.q.trim())}”`:"");
+  const seg=`<div class="seg" role="group" aria-label="Card front"><button data-front="acr" aria-pressed="${fc.front==="acr"}">Show acronym</button><button data-front="full" aria-pressed="${fc.front==="full"}">Show full form</button></div>`;
+  if(!fc.total){$("cards").innerHTML=`<p class="empty">No cards for this filter. Clear the search or pick another topic.</p>`;return;}
+  if(!fc.deck.length){
+    $("cards").innerHTML=`<div class="done"><h2>Deck complete</h2><p>You marked all ${fc.total} cards as known (${scope}).</p><button class="btn primary" data-act="restart">Shuffle and start again</button></div>`;return;}
+  const d=fc.deck[0];
+  const frontHTML=fc.front==="acr"?`<div class="big">${esc(d.a)}</div>`:`<div class="bigtext">${esc(d.f)}</div>`;
+  const pct=Math.round(fc.known/fc.total*100);
+  $("cards").innerHTML=`
+   <div class="deckbar"><span class="prog"><strong>${fc.known}</strong> of ${fc.total} known · ${fc.deck.length} left · ${scope}</span>${seg}</div>
+   <div class="bar" aria-hidden="true"><i style="width:${pct}%"></i></div>
+   <button class="card${fc.flipped?" flipped":""}" id="card" aria-label="Flashcard. Press to flip.">
+     <div class="inner">
+       <div class="face front"><span class="t">${esc(d.t)}</span>${frontHTML}<span class="hint">Click or press Space to flip</span></div>
+       <div class="face back"><span class="t">${esc(d.t)}</span><div class="answer"><div class="acr">${esc(d.a)}</div><div class="full">${esc(d.f)}</div><div class="mean">${esc(d.m)}</div></div></div>
+     </div>
+   </button>
+   <div class="actions">
+     <button class="btn" data-act="again" ${fc.flipped?"":"disabled"}>Again</button>
+     <button class="btn primary" data-act="know" ${fc.flipped?"":"disabled"}>I knew it</button>
+   </div>
+   <p class="keys"><kbd>Space</kbd> flip · <kbd>←</kbd> again · <kbd>→</kbd> knew it · <button class="seg" style="border:0;background:none;color:var(--accent);cursor:pointer;font-size:12px;padding:0" data-act="restart">Reshuffle</button></p>`;
+}
+function cardAct(a){
+  if(a==="flip"){fc.flipped=!fc.flipped; const c=$("card"); if(c){c.classList.toggle("flipped",fc.flipped); document.querySelectorAll("[data-act=again],[data-act=know]").forEach(b=>b.disabled=!fc.flipped);} return;}
+  if(a==="restart"){buildDeck();renderCards();return;}
+  if(!fc.flipped) return;
+  const d=fc.deck.shift(); if(a==="again") fc.deck.splice(Math.min(fc.deck.length,3),0,d); else fc.known++;
+  fc.flipped=false; renderCards();
+}
+
+function render(){
+  const list=filtered();
+  $("count").textContent=`${list.length} of ${D.length} acronyms`+(st.topic!=="All"?` · ${st.topic}`:"");
+  $("clear").hidden=!st.q;
+  renderChips(); renderAZ(list);
+  $("list").hidden=st.mode!=="list"; $("cards").hidden=st.mode!=="cards";
+  if(st.mode==="list") renderList(list); else {buildDeck(); renderCards();}
+}
+function setMode(m){st.mode=m;$("m-list").setAttribute("aria-pressed",m==="list");$("m-cards").setAttribute("aria-pressed",m==="cards");render();}
+
+$("q").addEventListener("input",e=>{st.q=e.target.value;render();});
+$("clear").onclick=()=>{st.q="";$("q").value="";render();$("q").focus();};
+$("chips").onclick=e=>{const b=e.target.closest(".chip"); if(!b) return; st.topic=b.dataset.t; save(); render();};
+$("m-list").onclick=()=>setMode("list"); $("m-cards").onclick=()=>setMode("cards");
+$("az").onclick=e=>{const a=e.target.closest("a"); if(!a) return; e.preventDefault(); document.getElementById("L-"+a.dataset.l)?.scrollIntoView({behavior:"smooth"});};
+$("list").onclick=e=>{const g=e.target.closest("[data-go]"); if(g){e.preventDefault(); goTo(g.dataset.go); return;}
+  const b=e.target.closest(".entry>button"); if(b) toggleEntry(b);};
+$("cards").onclick=e=>{const f=e.target.closest("[data-front]"); if(f){fc.front=f.dataset.front; fc.flipped=false; renderCards(); return;}
+  const a=e.target.closest("[data-act]"); if(a){cardAct(a.dataset.act); return;}
+  if(e.target.closest("#card")) cardAct("flip");};
+document.addEventListener("keydown",e=>{
+  if(st.mode!=="cards"||e.target.tagName==="INPUT") return;
+  if(e.key===" "){e.preventDefault();cardAct("flip");}
+  else if(e.key==="ArrowRight") cardAct("know");
+  else if(e.key==="ArrowLeft") cardAct("again");
+});
+render();
+if(location.hash){const id=location.hash.slice(1); const d=D.find(x=>slug(x.a)===id); if(d) setTimeout(()=>goTo(d.a),50); else if(id==="flashcards") setMode("cards");}
+</script>
+</body>
+</html>
